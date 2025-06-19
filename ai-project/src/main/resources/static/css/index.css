@@ -1,0 +1,482 @@
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+ * {
+            box-sizing: border-box;
+        }
+
+      body {
+    margin: 0;
+    background-color: #000000; /* Pure black */
+    color: #e2e8f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0;
+}
+
+
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: #000000;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #4ade80;
+        }
+
+        .signup-btn {
+            padding: 10px 20px;
+            background-color: #4ade80;
+            color: #0f172a;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+
+        .signup-btn:hover {
+            background-color: #22c55e;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 20px;
+        }
+
+        h1 {
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        h1 span {
+            color: #4ade80;
+            font-weight: 700;
+        }
+
+        p.sub {
+            font-size: 18px;
+            color: #94a3b8;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        form {
+            background-color: #000000;
+            padding: 30px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 700px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #cbd5e1;
+        }
+textarea {
+    width: 100%;
+    background-color: #161616;
+    color: transparent; /* Hide initial text */
+    caret-color: #e2e8f0; /* Keep cursor visible */
+    font-size: 16px;
+    border: none;
+    border-radius: 12px; /* smoother rounding */
+    padding: 20px;
+    resize: vertical;
+    min-height: 140px;
+    box-shadow: inset 0 0 0 1.5px #334155; /* thinner and cleaner border */
+    margin-bottom: 24px;
+    transition: box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+/* Show user's text only after input */
+textarea:not(:placeholder-shown) {
+    color: #e2e8f0;
+}
+
+textarea:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 2px whitesmoke; /* focus border */
+}
+
+
+        button {
+            background-color: #4ade80;
+            color: #0f172a;
+            padding: 14px 28px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #22c55e;
+        }
+
+        .footer {
+            margin-top: 80px;
+            font-size: 14px;
+            color: #94a3b8;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #cbd5e1;
+            margin: 0 12px;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 30px;
+            }
+
+            form {
+                padding: 20px;
+            }
+
+            button, .signup-btn {
+                width: 100%;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+      .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 700px;
+            margin-top: 20px;
+        }
+
+        .go-pro-btn {
+            padding: 10px 20px;
+            background-color: #ff4d4d;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .go-pro-btn:hover {
+            background-color: #e00000;
+        }
+
+        .user-profile {
+            position: relative;
+        }
+
+        .user-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            object-fit: cover; /* To make sure the image fills the circle */
+        }
+
+        .profile-card {
+            position: absolute;
+            top: 55px; /* Adjust as needed to position below the icon */
+            right: 0;
+            background-color: #1e293b;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            width: 300px; /* Adjust width as needed */
+            z-index: 10; /* Ensure it's above other elements */
+            display: none; /* Initially hidden */
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 15px;
+        }
+
+        .profile-picture {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-name {
+            font-weight: bold;
+            color: #e2e8f0;
+            margin-bottom: 5px;
+        }
+
+        .profile-email {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .daily-limit, .premium-credits {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .daily-limit:last-child, .premium-credits:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .limit-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .limit-info {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .limit-progress {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .progress-bar {
+            background-color: #334155;
+            border-radius: 5px;
+            height: 8px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background-color: #4ade80;
+            height: 100%;
+            border-radius: 5px;
+        }
+
+        .limit-text {
+            font-size: 12px;
+            color: #cbd5e1;
+        }
+
+        .credits-info {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .credits-available {
+            font-weight: bold;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .premium-badge {
+            background-color: #ffc85e;
+            color: #0f172a;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .delete-chat-btn, .logout-btn {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background-color 0.2s ease;
+        }
+
+        .delete-chat-btn {
+            background-color: #64748b;
+            color: #e2e8f0;
+        }
+
+        .delete-chat-btn:hover {
+            background-color: #475569;
+        }
+
+        .logout-btn {
+            background-color: #dc2626;
+            color: #e2e8f0;
+        }
+
+        .logout-btn:hover {
+            background-color: #b91c1c;
+        }
+        .user-profile {
+    display: flex;
+    align-items: center;
+    background-color: #121212;
+    border: 1px solid #2e2e2e;
+    border-radius: 12px;
+    padding: 6px 12px;
+    gap: 10px;
+    color: #ccc;
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.profile-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.username {
+    color: #ccc;
+}
+.small-light-text {
+    font-weight: 300;
+    font-size: 14px;
+    color: #94a3b8;
+}
+#dynamic-word {
+    transition: opacity 0.5s ease;
+    display: inline-block;
+}
+.fade-out {
+    opacity: 0;
+}
+
+.loader-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 15, 15, 0.95);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  animation: fadeIn 0.4s ease-in-out forwards;
+}
+
+.loader {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 30px;
+}
+
+.loader span {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: #4ade80;
+  box-shadow: 0 0 8px #4ade80aa;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform-origin: -30px center;
+  animation: orbit 1.2s linear infinite;
+}
+
+.loader span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loader span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(30px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(30px) rotate(-360deg);
+  }
+}
+
+.loader p {
+  color: #e2e8f0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
+  text-align: center;
+  animation: fadeInUp 0.6s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

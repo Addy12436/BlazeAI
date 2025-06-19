@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Go Pro – Blaze</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: #0f0f0f;
+      color: #e2e8f0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #18181b;
+      border-bottom: 1px solid #27272a;
+    }
+
+    .logo {
+      font-size: 1.75rem;
+      font-weight: bold;
+      color: #4ade80;
+    }
+
+    .back-btn {
+      background-color: #4ade80;
+      color: #0f172a;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .back-btn:hover {
+      background-color: #22c55e;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      color: #4ade80;
+      text-align: center;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+      width: 100%;
+    }
+
+    .features li {
+      background-color: #1e1e1e;
+      border: 1px solid #2a2a2a;
+      padding: 1rem 1.2rem;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      list-style: none;
+      line-height: 1.5;
+    }
+
+    .payment-options {
+      text-align: center;
+    }
+
+    .payment-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 2rem;
+      background-color: #4ade80;
+      color: #0f172a;
+      font-weight: bold;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .payment-btn:hover {
+      background-color: #22c55e;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.875rem;
+      color: #94a3b8;
+      margin-top: 4rem;
+    }
+
+    .footer a {
+      color: #94a3b8;
+      margin: 0 0.5rem;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">blaze</div>
+    <a th:href="@{/}" class="back-btn">← Back to Home</a>
+  </header>
+
+  <div class="content">
+    <h1>Upgrade to Blaze Pro</h1>
+    <h2>Unlock Premium Features</h2>
+
+    <ul class="features">
+      <li>✅ Unlimited Prompts – Generate limitless websites effortlessly.</li>
+      <li>⚡ Priority Access – Faster response and build times.</li>
+      <li>🎨 Advanced Customization – Add your own CSS, images, branding.</li>
+      <li>🛠 Enhanced Support – Get priority help whenever needed.</li>
+      <li>📁 Premium Templates – Access exclusive design presets.</li>
+      <li>🚫 Ad-Free Experience – Work distraction-free, no ads.</li>
+    </ul>
+
+    <div class="payment-options">
+      <p>Choose your preferred payment method:</p>
+      <a th:href="@{/api/payment/pay}" class="payment-btn">Pay ₹350 – Go Pro</a>
+    </div>
+
+    <div class="footer">
+      <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a>
+    </div>
+  </div>
+
+</body>
+</html>

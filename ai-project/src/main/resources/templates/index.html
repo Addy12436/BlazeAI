@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blaze – Website Generator</title>
+
+  <!-- ✅ Inter font (add if not already in index.css via @import) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- ✅ Remixicon -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <!-- ✅ Your main CSS last -->
+  <link rel="stylesheet" type="text/css" href="/css/index.css">
+</head>
+<body>
+
+   <header>
+        <div class="logo">blaze</div>
+        <div class="user-profile">
+     
+                   <img th:src="@{${profilePictureUrl}}" alt="Profile Picture" class="profile-img">
+    <span class="username" th:text="${username}"></span>
+            <div class="profile-card">
+                <div class="profile-header">
+                   <img th:src="@{${profilePictureUrl}}" alt="Profile Picture" class="profile-img">
+
+                    <div class="profile-info">
+                        <div class="profile-name" th:text="${userName}" id="user-display-name"></div>
+                    </div>
+                </div>
+                <div class="daily-limit">
+                    <div class="limit-title">Daily Free Message Limit</div>
+                    <div class="limit-info">You get <span th:text="${dailyMessageLimit}" id="daily-message-quota"></span> free messages every day</div>
+                    <div class="limit-progress">
+                        <div class="limit-text"><span th:text="${messagesUsed}" id="messages-used"></span>/<span th:text="${dailyMessageLimit}" id="total-messages"></span> tokens left</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%;" th:style="'width: ' + (${messagesUsed} / ${dailyMessageLimit} * 100) + '%;'" id="messages-progress"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="premium-credits">
+                    <div class="credits-info">Additional messages beyond daily limit</div>
+                    <div class="credits-available"><span th:text="${premiumCredits}" id="premium-credits-available"></span> credits available <span class="premium-badge" th:if="${isPremium}">Premium</span></div>
+                </div>
+                <div class="profile-actions">
+                   
+                  <button class="logout-btn" onclick="window.location.href='http://localhost:9090/do-logout'">Logout</button>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+      <h1>Create <span id="dynamic-word">website</span> in seconds</h1>
+
+        <p class="sub">No fancy frameworks. Just clean, fast HTML
+        
+        </p>
+
+
+      <form action="/generate" method="post" onsubmit="showLoader()" class="form-container">
+
+            <label for="prompt">Enter Prompt</label>
+<textarea id="prompt" name="prompt" placeholder="e.g., Generate a modern landing page for a college website"></textarea>
+
+          
+            <div class="button-container">
+                <button type="submit">Generate</button>
+               <a th:href="@{/pro}" class="go-pro-btn">Go Pro</a>
+
+            </div>
+            
+        </form>
+      <p class="small-light-text">
+  We'll generate a custom, fast website, component, or design prototype.  
+  The more details you provide, the better the result.
+</p>
+       
+
+    </main>
+
+     <div class="footer">
+        <a href="#">Pricing</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Refund Policy</a>
+    </div>
+
+
+
+
+</div>
+<div id="loader-overlay" class="loader-overlay">
+  <div class="loader">
+    <span></span>
+    <span></span>
+    <span></span>
+  
+  
+  </div>
+</div>
+
+
+     <script src="/js/index.js"></script>
+
+</body>
+</html>

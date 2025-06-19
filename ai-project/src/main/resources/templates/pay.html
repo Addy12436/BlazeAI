@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="bg-[#0F0F0F] text-white">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center px-4 bg-[#0F0F0F]">
+
+<div class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 bg-[#1C1C1C] rounded-xl shadow-xl overflow-hidden">
+  <!-- Left Panel -->
+  <div class="p-6 space-y-6 bg-[#1C1C1C] text-[#EDEDED]">
+    <div class="flex items-center gap-4">
+      <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-black font-bold text-xl">b</div>
+      <h2 class="text-xl font-semibold">Blaze</h2>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <div>
+        <h3 class="text-lg font-medium">blaze 30</h3>
+        <p class="text-sm text-gray-400">Get Unlimited credits for generating and modifying your dream projects</p>
+      </div>
+      <span class="font-semibold text-white">₹307.02</span>
+    </div>
+
+    <div class="border-t border-[#333333] pt-4 text-sm space-y-2">
+      <div class="flex justify-between text-gray-400">
+        <span>Subtotal</span>
+        <span>₹307.02</span>
+      </div>
+      <div class="flex justify-between text-gray-400">
+        <span>Tax</span>
+        <span>₹42.98</span>
+      </div>
+      <div class="flex justify-between font-semibold text-white text-lg">
+        <span>Total due now</span>
+        <span>₹350.00</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Panel -->
+  <div class="bg-[#121212] p-6 space-y-6">
+    <div class="flex justify-between items-center">
+      <span class="text-[#FFA94D] text-sm">⏱ Payment Link Expires in <span id="countdown">15:00</span></span>
+    </div>
+
+    <button id="pay-btn" class="w-full bg-white text-black py-3 font-semibold rounded-md hover:bg-gray-100 transition">
+      Pay ₹350.00
+    </button>
+
+    <p class="text-xs text-gray-500 text-center leading-relaxed">
+      This order process is conducted by our online reseller,<br>
+      <span class="text-white">razorpay.com</span>, who also handles order-related inquiries and returns.
+    </p>
+  </div>
+</div>
+
+<!-- Razorpay Script -->
+<script th:inline="javascript">
+  let secondsLeft = 15 * 60;
+  const countdownEl = document.getElementById("countdown");
+  const interval = setInterval(() => {
+    const m = String(Math.floor(secondsLeft / 60)).padStart(2, '0');
+    const s = String(secondsLeft % 60).padStart(2, '0');
+    countdownEl.textContent = `${m}:${s}`;
+    if (--secondsLeft < 0) {
+      clearInterval(interval);
+      countdownEl.textContent = "Expired";
+      document.getElementById("pay-btn").disabled = true;
+      document.getElementById("pay-btn").textContent = "Link Expired";
+    }
+  }, 1000);
+
+  const userEmail = /*[[${#authentication.name}]]*/ 'guest@example.com';
+  const razorpayKey = /*[[${razorpayKey}]]*/ '';
+
+  document.getElementById("pay-btn").addEventListener("click", function () {
+    fetch('/api/create-order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: userEmail })
+    })
+    .then(res => res.json())
+    .then(data => {
+      const options = {
+        key: razorpayKey,
+        amount: data.amount,
+        currency: 'INR',
+        name: 'Blaze',
+        description: '30 Credit Pack',
+        order_id: data.orderId,
+        prefill: {
+          email: userEmail
+        },
+        handler: function (response) {
+          fetch('/api/verify-payment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              razorpayPaymentId: response.razorpay_payment_id,
+              razorpayOrderId: response.razorpay_order_id,
+              razorpaySignature: response.razorpay_signature,
+              email: userEmail
+            })
+          })
+          .then(res => res.json())
+          .then(result => {
+            if (result.success) {
+              alert("✅ Payment successful!");
+              window.location.href = "/dashboard";
+            } else {
+              alert("⚠️ Payment verification failed.");
+            }
+          });
+        },
+        theme: { color: "#F37254" }
+      };
+      const rzp = new Razorpay(options);
+      rzp.open();
+    });
+  });
+</script>
+
+</body>
+</html>
